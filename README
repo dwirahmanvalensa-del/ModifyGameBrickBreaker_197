@@ -1,2 +1,46 @@
 screenshot/tampilan game over.png
 screenshot/tampilan permainan.png
+
+# MODIFIKASI GAME BLOCK BREAKER (PINK BUNNY EDITION)
+
+## 1. Deskripsi Proyek
+Proyek ini merupakan modifikasi dari permainan **Block Breaker** klasik menggunakan bahasa pemrograman Python dan library Pygame dengan menerapkan konsep Object-Oriented Programming (OOP). 
+Permainan ini mempertahankan mekanisme dasar Block Breaker, di mana pemain menggerakkan papan pemantul untuk menjaga bola agar tidak jatuh sekaligus menghancurkan balok-balok di atasnya.
+
+## 2. Perubahan dan Modifikasi Permainan
+
+Berikut merupakan perubahan yang telah dilakukan dari program original ke tema **Pink Bunny**:
+
+### A. Perubahan Palet Warna dan Latar Belakang
+Latar belakang game yang sebelumnya polos/gelap diubah menjadi warna pink pastel yang sangat lembut (`#FFF0F5`) untuk memberikan kesan estetis yang manis dan nyaman dipandang.
+
+- Warna latar belakang menggunakan *soft pink pastel*.
+- Palet warna balok menggunakan kombinasi warna-warna pastel (Pink, Blue, Green, Purple, Yellow).
+
+**Screenshot:**
+![Tampilan Latar Belakang dan Balok Pastel](images/screenshot-game.png)
+
+### B. Modifikasi Papan Pemantul (Striker) Menjadi Kelinci
+Objek pemantul (*striker*) standar diubah menjadi karakter kelinci yang dilengkapi dengan hiasan dua telinga panjang di bagian atas badannya. 
+
+- Warna badan pemantul disesuaikan dengan warna *pastel pink* dengan garis tepi putih yang rapi.
+- Ukuran dan koordinat telinci disesuaikan agar pas di atas papan pemantul.
+
+**Screenshot:**
+![Tampilan Pemukul Karakter Kelinci](images/screenshot-striker.png)
+
+### C. Mengubah Bola Menjadi Bentuk Beri/Hati (Berry/Heart Ball)
+Objek bola standar diganti menjadi bola bertema *Heart Pink* dengan tambahan efek bayangan (*shadow*) serta kilau putih agar terlihat seperti buah beri atau hati yang manis.
+
+- Ukuran dan kecepatan bola disesuaikan agar permainan tetap seru dan menantang.
+
+**Screenshot:**
+![Tampilan Bola Beri Pink](images/screenshot-ball.png)
+
+### D. Panel Antarmuka (UI) dan Layar Game Over
+Teks skor dan sisa nyawa (*lives*) dipindahkan ke dalam panel khusus di bagian bawah layar dengan latar belakang putih bersih dan garis pembatas pink pastel agar tidak bertumpuk dengan area permainan.
+
+- Layar *Game Over* juga dipercantik menggunakan lapisan transparan berwarna pink lembut dengan teks pemberitahuan yang bersih tanpa emoji.
+
+**Screenshot:**
+![Tampilan Game Over](images/screenshot-gameover.png)
