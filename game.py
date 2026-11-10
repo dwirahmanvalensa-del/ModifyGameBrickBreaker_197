@@ -198,19 +198,21 @@ def main():
     listOfBlocks = populateBlocks(
         blockWidth, blockHeight, horizontalGap, verticalGap)
 
+    # Game loop
     while running:
         screen.fill(BG_COLOR)
 
+        # Panel bawah untuk teks score dan lives agar rapi
         pygame.draw.rect(screen, WHITE, (0, HEIGHT - 35, WIDTH, 35))
         pygame.draw.line(screen, PASTEL_PINK, (0, HEIGHT - 35), (WIDTH, HEIGHT - 35), 2)
 
         scoreText = font.render("Score : " + str(score), True, DARK_TEXT)
         livesText = font.render("Lives : " + str(lives), True, DARK_TEXT)
-        
+
         screen.blit(scoreText, (20, HEIGHT - 26))
         screen.blit(livesText, (WIDTH - 110, HEIGHT - 26))
 
-    if not listOfBlocks:
+        if not listOfBlocks:
             listOfBlocks = populateBlocks(
                 blockWidth, blockHeight, horizontalGap, verticalGap)
 
@@ -221,7 +223,7 @@ def main():
 
             overText = font_large.render("GAME OVER", True, HEART_PINK)
             restartText = font.render("Tekan SPASI untuk Main Lagi", True, DARK_TEXT)
-            
+
             screen.blit(overText, (WIDTH//2 - 60, HEIGHT//2 - 20))
             screen.blit(restartText, (WIDTH//2 - 110, HEIGHT//2 + 20))
             pygame.display.update()
@@ -279,6 +281,7 @@ def main():
 
         pygame.display.update()
         clock.tick(FPS)
+
 
 if __name__ == "__main__":
     main()
