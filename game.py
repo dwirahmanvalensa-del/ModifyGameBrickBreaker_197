@@ -72,3 +72,34 @@ class Striker:
         return self.strikerRect
 
 
+# Block Class
+class Block:
+    def __init__(self, posx, posy, width, height, color):
+        self.posx, self.posy = posx, posy
+        self.width, self.height = width, height
+        self.color = color
+        self.damage = 100
+
+        if color in [PASTEL_PURPLE, PASTEL_BLUE]:
+            self.health = 200
+        else:
+            self.health = 100
+
+        self.blockRect = pygame.Rect(
+            self.posx, self.posy, self.width, self.height)
+
+    def display(self):
+        if self.health > 0:
+            self.brick = pygame.draw.rect(screen, self.color, self.blockRect, border_radius=6)
+            pygame.draw.rect(screen, WHITE, self.blockRect, 2, border_radius=6)
+
+    def hit(self):
+        self.health -= self.damage
+
+    def getRect(self):
+        return self.blockRect
+
+    def getHealth(self):
+        return self.health
+
+
