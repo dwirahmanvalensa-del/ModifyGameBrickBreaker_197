@@ -103,3 +103,49 @@ class Block:
         return self.health
 
 
+# Ball Class
+class Ball:
+    def __init__(self, posx, posy, radius, speed, color):
+        self.posx, self.posy = posx, posy
+        self.radius = radius
+        self.speed = speed
+        self.color = color
+        self.xFac, self.yFac = 1, 1
+
+        self.ball = pygame.draw.circle(
+            screen, self.color, (int(self.posx), int(self.posy)), self.radius)
+
+    def display(self):
+        pygame.draw.circle(screen, SHADOW_PINK, (int(self.posx), int(self.posy)), self.radius + 3)
+        self.ball = pygame.draw.circle(
+            screen, HEART_PINK, (int(self.posx), int(self.posy)), self.radius)
+        pygame.draw.circle(
+            screen, WHITE, (int(self.posx) - 2, int(self.posy) - 2), 3)
+
+    def update(self):
+        self.posx += self.xFac*self.speed
+        self.posy += self.yFac*self.speed
+
+        if self.posx <= 0 or self.posx >= WIDTH:
+            self.xFac *= -1
+
+        if self.posy <= 0:
+            self.yFac *= -1
+
+        if self.posy >= HEIGHT:
+            return True
+
+        return False
+
+    def reset(self):
+        self.posx = WIDTH // 2
+        self.posy = HEIGHT - 150
+        self.xFac, self.yFac = 1, -1
+
+    def hit(self):
+        self.yFac *= -1
+
+    def getRect(self):
+        return self.ball
+
+
