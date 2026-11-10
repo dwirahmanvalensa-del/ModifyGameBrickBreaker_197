@@ -29,3 +29,46 @@ clock = pygame.time.Clock()
 FPS = 30
 
 
+# Striker class (Karakter Kelinci dengan Telinga Panjang)
+class Striker:
+    def __init__(self, posx, posy, width, height, speed, color):
+        self.posx, self.posy = posx, posy
+        self.width, self.height = width, height
+        self.speed = speed
+        self.color = color
+
+        self.strikerRect = pygame.Rect(
+            self.posx, self.posy, self.width, self.height)
+
+    def display(self):
+        # Badan kelinci (papan pemukul)
+        self.striker = pygame.draw.rect(screen, PASTEL_PINK, self.strikerRect, border_radius=10)
+        pygame.draw.rect(screen, WHITE, self.strikerRect, 2, border_radius=10)
+        
+        # Telinga kelinci di atas badan
+        ear_width, ear_height = 14, 30
+        ear1_x = self.posx + 20
+        ear2_x = self.posx + self.width - 34
+        ear_y = self.posy - ear_height
+        
+        pygame.draw.ellipse(screen, PASTEL_PINK, (ear1_x, ear_y, ear_width, ear_height))
+        pygame.draw.ellipse(screen, WHITE, (ear1_x + 3, ear_y + 5, ear_width - 6, ear_height - 10))
+        
+        pygame.draw.ellipse(screen, PASTEL_PINK, (ear2_x, ear_y, ear_width, ear_height))
+        pygame.draw.ellipse(screen, WHITE, (ear2_x + 3, ear_y + 5, ear_width - 6, ear_height - 10))
+
+    def update(self, xFac):
+        self.posx += self.speed*xFac
+
+        if self.posx <= 0:
+            self.posx = 0
+        elif self.posx+self.width >= WIDTH:
+            self.posx = WIDTH-self.width
+
+        self.strikerRect = pygame.Rect(
+            self.posx, self.posy, self.width, self.height)
+
+    def getRect(self):
+        return self.strikerRect
+
+
