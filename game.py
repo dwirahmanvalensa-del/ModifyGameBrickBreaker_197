@@ -198,4 +198,84 @@ def main():
     listOfBlocks = populateBlocks(
         blockWidth, blockHeight, horizontalGap, verticalGap)
 
-    
+    while running:
+        screen.fill(BG_COLOR)
+
+        pygame.draw.rect(screen, WHITE, (0, HEIGHT - 35, WIDTH, 35))
+        pygame.draw.line(screen, PASTEL_PINK, (0, HEIGHT - 35), (WIDTH, HEIGHT - 35), 2)
+
+        scoreText = font.render("Score : " + str(score), True, DARK_TEXT)
+        livesText = font.render("Lives : " + str(lives), True, DARK_TEXT)
+        
+        screen.blit(scoreText, (20, HEIGHT - 26))
+        screen.blit(livesText, (WIDTH - 110, HEIGHT - 26))
+
+    if not listOfBlocks:
+            listOfBlocks = populateBlocks(
+                blockWidth, blockHeight, horizontalGap, verticalGap)
+
+        if lives <= 0:
+            overlay = pygame.Surface((WIDTH, HEIGHT), pygame.SRCALPHA)
+            overlay.fill((255, 240, 245, 200))
+            screen.blit(overlay, (0, 0))
+
+            overText = font_large.render("GAME OVER", True, HEART_PINK)
+            restartText = font.render("Tekan SPASI untuk Main Lagi", True, DARK_TEXT)
+            
+            screen.blit(overText, (WIDTH//2 - 60, HEIGHT//2 - 20))
+            screen.blit(restartText, (WIDTH//2 - 110, HEIGHT//2 + 20))
+            pygame.display.update()
+
+            running = gameOver()
+
+            while listOfBlocks:
+                listOfBlocks.pop(0)
+
+            lives = 3
+            score = 0
+            listOfBlocks = populateBlocks(
+                blockWidth, blockHeight, horizontalGap, verticalGap)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    strikerXFac = -1
+                if event.key == pygame.K_RIGHT:
+                    strikerXFac = 1
+
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                    strikerXFac = 0
+
+        # Collision check
+        if(collisionChecker(striker.getRect(), ball.getRect())):
+            ball.hit()
+        for block in listOfBlocks:
+            if(collisionChecker(block.getRect(), ball.getRect())):
+                ball.hit()
+                block.hit()
+
+                if block.getHealth() <= 0:
+                    listOfBlocks.pop(listOfBlocks.index(block))
+                    score += 5
+
+        # Update
+        striker.update(strikerXFac)
+        lifeLost = ball.update()
+
+        if lifeLost:
+            lives -= 1
+            ball.reset()
+            print(lives)
+
+        # Display
+        striker.display()
+        ball.display()
+
+        for block in listOfBlocks:
+            block.display()
+
+        pygame.display.update()
+        clock.tick(FPS)
