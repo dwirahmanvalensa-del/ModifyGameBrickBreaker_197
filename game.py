@@ -181,3 +181,21 @@ def gameOver():
                     return True
 
 
+# Game Manager
+def main():
+    running = True
+    lives = 3
+    score = 0
+
+    striker = Striker(WIDTH//2 - 50, HEIGHT-50, 100, 20, 10, PASTEL_PINK)
+    strikerXFac = 0
+
+    ball = Ball(WIDTH//2, HEIGHT-150, 8, 5, HEART_PINK)
+
+    blockWidth, blockHeight = 45, 15
+    horizontalGap, verticalGap = 10, 10
+
+    listOfBlocks = populateBlocks(
+        blockWidth, blockHeight, horizontalGap, verticalGap)
+
+    
