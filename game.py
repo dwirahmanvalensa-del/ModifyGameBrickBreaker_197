@@ -149,3 +149,35 @@ class Ball:
         return self.ball
 
 
+# Helper Functions
+
+def collisionChecker(rect, ball):
+    if pygame.Rect.colliderect(rect, ball):
+        return True
+    return False
+
+
+def populateBlocks(blockWidth, blockHeight, horizontalGap, verticalGap):
+    listOfBlocks = []
+    pastel_palette = [PASTEL_PINK, PASTEL_BLUE, PASTEL_GREEN, PASTEL_PURPLE, PASTEL_YELLOW]
+
+    for i in range(15, WIDTH - blockWidth, blockWidth+horizontalGap):
+        for j in range(40, HEIGHT//2, blockHeight+verticalGap):
+            listOfBlocks.append(
+                Block(i, j, blockWidth, blockHeight, 
+                      random.choice(pastel_palette)))
+
+    return listOfBlocks
+
+
+def gameOver():
+    gameOver = True
+    while gameOver:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    return True
+
+
